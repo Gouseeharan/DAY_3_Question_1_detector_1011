@@ -19,4 +19,5 @@ Overlapping sequences must be supported.
 **Example:**
 
 din:     1 0 1 1 0 1 1
+
 detect:  0 0 0 1 0 0 1
