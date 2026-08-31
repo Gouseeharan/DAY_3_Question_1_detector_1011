@@ -1,0 +1,55 @@
+module detector ( input clk, reset, din , output reg detect);
+
+//states:
+parameter S0 = 1'b0;
+parameter S1 = 1'b1;
+parameter S2 = 2'b10;
+parameter S3 = 3'b101;
+parameter S4 = 4'b1011;
+
+reg current_state,next_state;
+
+//current state:
+always @( posedge clk) begin
+  if ( reset )
+  current_state <= S0;
+  else
+  current_state <= next_state;
+
+//next state
+always @(*) begin
+  case (current_state)
+  S0:begin
+    if ( din == 1)
+    next_state = S1;
+    else 
+    next_state = S0;
+    end
+  S1:begin
+    if ( din == 1)
+    next_state = S1;
+    else 
+    next_state = S2;
+    end
+  S2:begin
+    if ( din == 1)
+    next_state = S3;
+    else 
+    next_state = S0;
+    end
+  S3:begin
+    if ( din == 1)
+    next_state = S4;
+    else 
+    next_state = S3;
+    end
+  endcase
+
+  //output logic
+    always @(*) begin
+    if ( current_state == S4 && din == 1)
+    detect = 1'b1;
+    else 
+    detect = 1'b0;
+    end
+    endmodule
