@@ -40,12 +40,13 @@ always @(*) begin
     end
  S3:begin
     if ( din == 1)
-    next_state = S0;
+    next_state = S1;
     else 
-    next_state = S0;
+    next_state = S2;
     end
-end
+  default: next_state = S0;
 endcase
+end
 
 //output logic
     always @(*) begin
